@@ -1,24 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LBd-YX-YRu">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Timer View Controller-->
+        <scene sceneID="O3g-R9-fc4">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="LBd-YX-YRu" customClass="TimerViewController" customModule="Timer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="72w-Hh-Lhc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="fFl-Lp-STT" userLabel="Timer Background">
+                                <rect key="frame" x="0.0" y="44" width="414" height="487"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktx-Kt-ehx">
+                                        <rect key="frame" x="20" y="233" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ktx-Kt-ehx" secondAttribute="trailing" constant="20" id="6OS-tl-iv2"/>
+                                    <constraint firstItem="Ktx-Kt-ehx" firstAttribute="centerY" secondItem="fFl-Lp-STT" secondAttribute="centerY" id="KZT-CE-Vfy"/>
+                                    <constraint firstItem="Ktx-Kt-ehx" firstAttribute="leading" secondItem="fFl-Lp-STT" secondAttribute="leading" constant="20" id="gpE-Gj-xSJ"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="bottom" distribution="equalSpacing" alignment="bottom" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K2J-ur-vJA" userLabel="Buttons Stack View">
+                                <rect key="frame" x="30" y="456" width="354" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1Y-yb-5uM">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="7Ov-lK-ryW"/>
+                                            <constraint firstAttribute="width" secondItem="y1Y-yb-5uM" secondAttribute="height" multiplier="1:1" id="gdJ-Kb-TwK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                        <state key="normal" title="Stop">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stopButtonPressed:" destination="LBd-YX-YRu" eventType="touchUpInside" id="NFo-ml-Jhe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fs-qG-x8U">
+                                        <rect key="frame" x="284" y="0.0" width="70" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="3Fs-qG-x8U" secondAttribute="height" multiplier="1:1" id="Agp-LV-UKa"/>
+                                            <constraint firstAttribute="width" constant="70" id="dJe-Lw-tZw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                        <state key="normal" title="Start">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startButtonPressed:" destination="LBd-YX-YRu" eventType="touchUpInside" id="2ii-Ah-7ca"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3Fs-qG-x8U" firstAttribute="width" secondItem="3Fs-qG-x8U" secondAttribute="height" multiplier="1:1" id="Cmd-re-kv0"/>
+                                </constraints>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yvJ-zv-KZq">
+                                <rect key="frame" x="0.0" y="531" width="414" height="331"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yvJ-zv-KZq" secondAttribute="height" multiplier="5:4" id="Hpa-Gh-vBQ"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="X8x-Cf-Vux">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X8x-Cf-Vux" id="9WG-9x-6rC">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jTu-x8-LFS" firstAttribute="trailing" secondItem="K2J-ur-vJA" secondAttribute="trailing" constant="30" id="4m8-Uy-t9e"/>
+                            <constraint firstItem="fFl-Lp-STT" firstAttribute="top" secondItem="jTu-x8-LFS" secondAttribute="top" id="9El-iB-no1"/>
+                            <constraint firstItem="yvJ-zv-KZq" firstAttribute="top" secondItem="fFl-Lp-STT" secondAttribute="bottom" id="Bme-EB-VTo"/>
+                            <constraint firstItem="yvJ-zv-KZq" firstAttribute="leading" secondItem="jTu-x8-LFS" secondAttribute="leading" id="DWC-g3-h5i"/>
+                            <constraint firstItem="fFl-Lp-STT" firstAttribute="leading" secondItem="jTu-x8-LFS" secondAttribute="leading" id="GDC-6V-nM5"/>
+                            <constraint firstItem="jTu-x8-LFS" firstAttribute="bottom" secondItem="yvJ-zv-KZq" secondAttribute="bottom" id="JSc-Lt-htN"/>
+                            <constraint firstItem="jTu-x8-LFS" firstAttribute="trailing" secondItem="yvJ-zv-KZq" secondAttribute="trailing" id="JVw-Yj-17I"/>
+                            <constraint firstItem="K2J-ur-vJA" firstAttribute="leading" secondItem="jTu-x8-LFS" secondAttribute="leading" constant="30" id="MFf-pe-yBg"/>
+                            <constraint firstItem="jTu-x8-LFS" firstAttribute="trailing" secondItem="fFl-Lp-STT" secondAttribute="trailing" id="n9c-qS-SK4"/>
+                            <constraint firstItem="yvJ-zv-KZq" firstAttribute="top" secondItem="K2J-ur-vJA" secondAttribute="bottom" constant="5" id="xlw-cU-GFr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jTu-x8-LFS"/>
                     </view>
+                    <connections>
+                        <outlet property="startButton" destination="3Fs-qG-x8U" id="RQY-dx-ycl"/>
+                        <outlet property="startButtonWidthConstraint" destination="dJe-Lw-tZw" id="Ma9-AB-039"/>
+                        <outlet property="stopButton" destination="y1Y-yb-5uM" id="BKN-Yy-6CA"/>
+                        <outlet property="stopButtonWidthConstraint" destination="7Ov-lK-ryW" id="Ink-VF-Ylz"/>
+                        <outlet property="timeLabel" destination="Ktx-Kt-ehx" id="fjJ-f9-1Tr"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dlC-UY-kpG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="135" y="-534"/>
         </scene>
     </scenes>
 </document>
