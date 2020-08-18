@@ -16,10 +16,16 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var stopButtonWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var startButtonWidthConstraint: NSLayoutConstraint!
     
+    // MARK: Properties
+    private var timer: TimerType = TimeCounter()
+    private var timeObservation: NSKeyValueObservation?
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
+        timer.delegate = self
     }
 
     override func viewDidLayoutSubviews() {
@@ -28,11 +34,12 @@ class TimerViewController: UIViewController {
     }
     
     // MARK: Button actions
-    @IBAction func stopButtonPressed(_ sender: Any) {
+    @IBAction func startButtonPressed(_ sender: Any) {
+        timer.startTimer()
     }
     
-    @IBAction func startButtonPressed(_ sender: Any) {
-        
+    @IBAction func stopButtonPressed(_ sender: Any) {
+        timer.stopTimer()
     }
     
     // MARK: UI Configuration
@@ -60,3 +67,8 @@ class TimerViewController: UIViewController {
     }
 }
 
+extension TimerViewController: TimerTypeDelegate {
+    func didUpdateTimeInterval(with timeInterval: String) {
+        timeLabel.text = timeInterval
+    }
+ }
