@@ -26,43 +26,21 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-
+        addGesturesRecognition()
+        
         timer.delegate = self
         
         historyTableView.delegate = self
         historyTableView.dataSource = self
-        
-        resumeTimerIfNeeded()
     }
     
     // MARK: Button actions
     @IBAction func startPauseButtonPressed(_ sender: Any) {
-        switch timer.state {
-        case .running:
-            timer.pauseTimer()
-            
-            // Next action for a user is to resume timer
-            startPauseButton.backgroundColor = UIColor.green
-            startPauseButton.setTitle("Resume", for: .normal)
-        default:
-            timer.startTimer()
-            
-            // Next action for a user is to pause timer
-            startPauseButton.backgroundColor = UIColor.yellow
-            startPauseButton.setTitle("Pause", for: .normal)
-        }
+        startPauseAction()
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-        if timer.state == .running || timer.state == .paused {
-            showAlert(time: timeLabel.text ?? "", completion: {
-                self.timer.stopTimer()
-                
-                // Next action for a user is to start timer
-                self.startPauseButton.backgroundColor = UIColor.green
-                self.startPauseButton.setTitle("Start", for: .normal)
-            })
-        }
+        stopAction()
     }
     
     // MARK: Showing alert
@@ -163,7 +141,51 @@ private extension TimerViewController {
         historyTableView.endUpdates()
     }
     
-    func resumeTimerIfNeeded() {
-//        if timer.
+    // MARK: Gestures
+    func addGesturesRecognition() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        doubleTap.numberOfTapsRequired = 2
+        
+        view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(doubleTap)
+    }
+    
+    @objc func tapped() {
+        startPauseAction()
+    }
+    
+    @objc func doubleTapped() {
+        stopAction()
+    }
+    
+    // MARK: Timer Actions
+    func startPauseAction() {
+        switch timer.state {
+        case .running:
+            timer.pauseTimer()
+            
+            // Next action for a user is to resume timer
+            startPauseButton.backgroundColor = UIColor.green
+            startPauseButton.setTitle("Resume", for: .normal)
+        default:
+            timer.startTimer()
+            
+            // Next action for a user is to pause timer
+            startPauseButton.backgroundColor = UIColor.yellow
+            startPauseButton.setTitle("Pause", for: .normal)
+        }
+    }
+    
+    func stopAction() {
+        if timer.state == .running || timer.state == .paused {
+            showAlert(time: timeLabel.text ?? "", completion: {
+                self.timer.stopTimer()
+                
+                // Next action for a user is to start timer
+                self.startPauseButton.backgroundColor = UIColor.green
+                self.startPauseButton.setTitle("Start", for: .normal)
+            })
+        }
     }
 }
