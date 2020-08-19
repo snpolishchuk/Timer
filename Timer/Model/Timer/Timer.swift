@@ -79,14 +79,14 @@ private extension TimeCounter {
         state = .paused
     
         timeIntervalBeforePause = actualTimeInterval
-        self.startTime = nil
+        startTime = nil
         
         stopActionTimer()
     }
     
     // MARK: Timer logic
     @objc func updateCounter() {
-        guard let startTime = self.startTime else { return }
+        guard let startTime = startTime else { return }
         state = .running
         actualTimeInterval = Date().timeIntervalSince(startTime) + timeIntervalBeforePause
         delegate?.didUpdateTimeInterval(with: actualTimeInterval.asString)

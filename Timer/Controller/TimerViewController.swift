@@ -20,8 +20,8 @@ class TimerViewController: UIViewController {
     // MARK: Properties
     private var timer: TimerType = TimeCounter()
     private var timeObservation: NSKeyValueObservation?
-    private var timeIntervalsHistory = [(name: String, time: String)]()
-    
+    private var timeIntervalsHistory = TimeIntervalHistory()
+
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +67,8 @@ extension TimerViewController: TimerTypeDelegate {
         switch state {
         case .none:
             // Next action for a user is to start timer
-            self.startPauseButton.backgroundColor = UIColor.green
-            self.startPauseButton.setTitle("Start", for: .normal)
+            startPauseButton.backgroundColor = UIColor.green
+            startPauseButton.setTitle("Start", for: .normal)
         case .running:
             // Next action for a user is to pause timer
             startPauseButton.backgroundColor = UIColor.yellow
@@ -88,11 +88,11 @@ extension TimerViewController: TimerTypeDelegate {
 // MARK: TableView DataSource & Delegate
 extension TimerViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeIntervalsHistory.count
+        return timeIntervalsHistory.timeIntervals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let timeIntervalData = timeIntervalsHistory[indexPath.row]
+        let timeIntervalData = timeIntervalsHistory.timeIntervals[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimeInterval") as! HistoryTableViewCell
         cell.setup(name: timeIntervalData.name, time: timeIntervalData.time)
@@ -108,7 +108,7 @@ extension TimerViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-            timeIntervalsHistory.remove(at: indexPath.row)
+            timeIntervalsHistory.timeIntervals.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .none)
             tableView.endUpdates()
         }
@@ -149,9 +149,9 @@ private extension TimerViewController {
     
     // MARK: Timer UI Logic
     func saveTimeInterval(name: String, time: String) {
-        timeIntervalsHistory.append((name: name, time: time))
+        timeIntervalsHistory.timeIntervals.append(TimeIntervalEntity(name: name, time: time))
         
-        let indexPath = IndexPath(row: timeIntervalsHistory.count - 1, section: 0)
+        let indexPath = IndexPath(row: timeIntervalsHistory.timeIntervals.count - 1, section: 0)
         
         historyTableView.beginUpdates()
         historyTableView.insertRows(at: [indexPath], with: .automatic)

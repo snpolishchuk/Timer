@@ -11,6 +11,8 @@
 		DD4CB68424ED68EA00814464 /* TimerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68324ED68E900814464 /* TimerType.swift */; };
 		DD4CB68824ED774200814464 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68724ED774200814464 /* HistoryTableViewCell.swift */; };
 		DD4CB68B24ED8C3F00814464 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */; };
+		DD4CB68F24EDAED900814464 /* TimeIntervalHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68E24EDAED900814464 /* TimeIntervalHistory.swift */; };
+		DD4CB69124EDAF6800814464 /* TimeIntervalEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB69024EDAF6800814464 /* TimeIntervalEntity.swift */; };
 		DD6AB27324EC5082004BA8B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27224EC5082004BA8B9 /* AppDelegate.swift */; };
 		DD6AB27524EC5082004BA8B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27424EC5082004BA8B9 /* SceneDelegate.swift */; };
 		DD6AB27724EC5082004BA8B9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27624EC5082004BA8B9 /* TimerViewController.swift */; };
@@ -24,6 +26,8 @@
 		DD4CB68324ED68E900814464 /* TimerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerType.swift; sourceTree = "<group>"; };
 		DD4CB68724ED774200814464 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		DD4CB68E24EDAED900814464 /* TimeIntervalHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalHistory.swift; sourceTree = "<group>"; };
+		DD4CB69024EDAF6800814464 /* TimeIntervalEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalEntity.swift; sourceTree = "<group>"; };
 		DD6AB26F24EC5082004BA8B9 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6AB27224EC5082004BA8B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD6AB27424EC5082004BA8B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,8 +52,8 @@
 		DD4CB68224ED68D800814464 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DD4CB68024EC826600814464 /* Timer.swift */,
-				DD4CB68324ED68E900814464 /* TimerType.swift */,
+				DD4CB68D24EDAEC700814464 /* History */,
+				DD4CB68C24EDAEBE00814464 /* Timer */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -76,6 +80,24 @@
 				DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DD4CB68C24EDAEBE00814464 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				DD4CB68024EC826600814464 /* Timer.swift */,
+				DD4CB68324ED68E900814464 /* TimerType.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		DD4CB68D24EDAEC700814464 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				DD4CB68E24EDAED900814464 /* TimeIntervalHistory.swift */,
+				DD4CB69024EDAF6800814464 /* TimeIntervalEntity.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		DD6AB26624EC5082004BA8B9 = {
@@ -192,6 +214,8 @@
 			files = (
 				DD4CB68B24ED8C3F00814464 /* TimeInterval.swift in Sources */,
 				DD6AB27724EC5082004BA8B9 /* TimerViewController.swift in Sources */,
+				DD4CB68F24EDAED900814464 /* TimeIntervalHistory.swift in Sources */,
+				DD4CB69124EDAF6800814464 /* TimeIntervalEntity.swift in Sources */,
 				DD6AB27324EC5082004BA8B9 /* AppDelegate.swift in Sources */,
 				DD4CB68424ED68EA00814464 /* TimerType.swift in Sources */,
 				DD6AB27524EC5082004BA8B9 /* SceneDelegate.swift in Sources */,
