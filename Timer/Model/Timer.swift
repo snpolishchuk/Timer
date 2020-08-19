@@ -10,7 +10,11 @@ import Foundation
 
 class TimeCounter: TimerType {
     // MARK: Output
-    var state: TimerState = .none
+    var state: TimerState = .none {
+        didSet {
+            delegate?.stateDidChange(state: state)
+        }
+    }
     weak var delegate: TimerTypeDelegate?
 
     // MARK: Properties
@@ -31,33 +35,21 @@ class TimeCounter: TimerType {
     }
     
     deinit {
-        stopTimer()
+        stop()
     }
     
     // MARK: Input
-    func startTimer() {
-        // Start only one timer
-        guard actionTimer == nil else { return }
-        
-        if startTime == nil {
-            startTime = Date()
+    func startPause() {
+        switch state {
+        case .running:
+            pause()
+        default:
+            start()
         }
-        
-        state = .running
-        actionTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
     }
     
-    func pauseTimer() {
-        state = .paused
-    
-        timeIntervalBeforePause = actualTimeInterval
-        self.startTime = nil
-        
-        stopActionTimer()
-    }
-    
-    func stopTimer() {
-        state = .stopped
+    func stop() {
+        state = .none
         
         // Reset time
         actualTimeInterval = 0
@@ -72,8 +64,30 @@ class TimeCounter: TimerType {
 
 // MARK: Private methods
 private extension TimeCounter {
+    // MARK: Timer actions
+    func start() {
+        // Start only one timer
+        guard actionTimer == nil else { return }
+        
+        if startTime == nil {
+            startTime = Date()
+        }
+        actionTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+    }
+    
+    func pause() {
+        state = .paused
+    
+        timeIntervalBeforePause = actualTimeInterval
+        self.startTime = nil
+        
+        stopActionTimer()
+    }
+    
+    // MARK: Timer logic
     @objc func updateCounter() {
         guard let startTime = self.startTime else { return }
+        state = .running
         actualTimeInterval = Date().timeIntervalSince(startTime) + timeIntervalBeforePause
         delegate?.didUpdateTimeInterval(with: actualTimeInterval.asString)
     }
@@ -87,7 +101,7 @@ private extension TimeCounter {
 
     func resumeCounterIfNeeded(from startTime: Date?) {
         if startTime != nil {
-            startTimer()
+            start()
         }
     }
 }

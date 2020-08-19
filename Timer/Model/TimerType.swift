@@ -12,17 +12,16 @@ enum TimerState {
      case none
      case running
      case paused
-     case stopped
  }
 
 protocol TimerType {
     var state: TimerState { get }
     var delegate: TimerTypeDelegate? { get set }
-    func startTimer()
-    func pauseTimer()
-    func stopTimer()
+    func startPause()
+    func stop()
 }
 
 protocol TimerTypeDelegate: class {
     func didUpdateTimeInterval(with timeInterval: String)
+    func stateDidChange(state: TimerState)
 }

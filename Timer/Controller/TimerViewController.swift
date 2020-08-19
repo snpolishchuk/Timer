@@ -63,6 +63,23 @@ class TimerViewController: UIViewController {
 }
 
 extension TimerViewController: TimerTypeDelegate {
+    func stateDidChange(state: TimerState) {
+        switch state {
+        case .none:
+            // Next action for a user is to start timer
+            self.startPauseButton.backgroundColor = UIColor.green
+            self.startPauseButton.setTitle("Start", for: .normal)
+        case .running:
+            // Next action for a user is to pause timer
+            startPauseButton.backgroundColor = UIColor.yellow
+            startPauseButton.setTitle("Pause", for: .normal)
+        case .paused:
+            // Next action for a user is to resume timer
+            startPauseButton.backgroundColor = UIColor.green
+            startPauseButton.setTitle("Resume", for: .normal)
+        }
+    }
+    
     func didUpdateTimeInterval(with timeInterval: String) {
         timeLabel.text = timeInterval
     }
@@ -125,7 +142,7 @@ private extension TimerViewController {
         startPauseButton.layer.cornerRadius = startPauseButton.frame.size.height / 2
         stopButton.layer.cornerRadius = startPauseButton.frame.size.height / 2
         
-        // Set titles for buttons
+        // Set initial titles for buttons
         startPauseButton.setTitle("Start", for: .normal)
         stopButton.setTitle("Stop", for: .normal)
     }
@@ -161,30 +178,14 @@ private extension TimerViewController {
     
     // MARK: Timer Actions
     func startPauseAction() {
-        switch timer.state {
-        case .running:
-            timer.pauseTimer()
-            
-            // Next action for a user is to resume timer
-            startPauseButton.backgroundColor = UIColor.green
-            startPauseButton.setTitle("Resume", for: .normal)
-        default:
-            timer.startTimer()
-            
-            // Next action for a user is to pause timer
-            startPauseButton.backgroundColor = UIColor.yellow
-            startPauseButton.setTitle("Pause", for: .normal)
-        }
+        timer.startPause()
     }
     
     func stopAction() {
+        // Otherwise here is nothing to stop
         if timer.state == .running || timer.state == .paused {
             showAlert(time: timeLabel.text ?? "", completion: {
-                self.timer.stopTimer()
-                
-                // Next action for a user is to start timer
-                self.startPauseButton.backgroundColor = UIColor.green
-                self.startPauseButton.setTitle("Start", for: .normal)
+                self.timer.stop()
             })
         }
     }
