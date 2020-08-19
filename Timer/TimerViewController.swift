@@ -24,13 +24,12 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+
         timer.delegate = self
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        configureUIAfterAutolayout()
     }
     
     // MARK: Button actions
@@ -48,15 +47,6 @@ class TimerViewController: UIViewController {
         timeLabel.font = UIFont.systemFont(ofSize: 100)
         timeLabel.numberOfLines = 1
         
-        // Adjust button sizes to fit text
-        let startButtonWidth = startButton.intrinsicContentSize.width
-        let stopButtonWidth = stopButton.intrinsicContentSize.width
-        let maxWidth = startButtonWidth > stopButtonWidth ? startButtonWidth : stopButtonWidth
-        startButtonWidthConstraint.constant = maxWidth
-        stopButtonWidthConstraint.constant = maxWidth
-    }
-    
-    private func configureUIAfterAutolayout() {
         // Actions needed to have time label size scale to the whole screen width on all devices
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.minimumScaleFactor = 0.1
@@ -64,6 +54,13 @@ class TimerViewController: UIViewController {
         // Make buttons round after Autolayout settings (we have aspect ratio 1:1 for buttons)
         startButton.layer.cornerRadius = startButton.frame.size.height / 2
         stopButton.layer.cornerRadius = startButton.frame.size.height / 2
+        
+        // Adjust button sizes to fit text
+        let startButtonWidth = startButton.intrinsicContentSize.width
+        let stopButtonWidth = stopButton.intrinsicContentSize.width
+        let maxWidth = startButtonWidth > stopButtonWidth ? startButtonWidth : stopButtonWidth
+        startButtonWidthConstraint.constant = maxWidth
+        stopButtonWidthConstraint.constant = maxWidth
     }
 }
 

@@ -19,8 +19,8 @@
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="fFl-Lp-STT" userLabel="Timer Background">
                                 <rect key="frame" x="0.0" y="44" width="414" height="487"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktx-Kt-ehx">
-                                        <rect key="frame" x="20" y="233" width="374" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.00" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktx-Kt-ehx">
+                                        <rect key="frame" x="0.0" y="233" width="414" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -28,9 +28,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Ktx-Kt-ehx" secondAttribute="trailing" constant="20" id="6OS-tl-iv2"/>
+                                    <constraint firstItem="Ktx-Kt-ehx" firstAttribute="centerX" secondItem="fFl-Lp-STT" secondAttribute="centerX" id="2cc-Gx-cWn"/>
                                     <constraint firstItem="Ktx-Kt-ehx" firstAttribute="centerY" secondItem="fFl-Lp-STT" secondAttribute="centerY" id="KZT-CE-Vfy"/>
-                                    <constraint firstItem="Ktx-Kt-ehx" firstAttribute="leading" secondItem="fFl-Lp-STT" secondAttribute="leading" constant="20" id="gpE-Gj-xSJ"/>
+                                    <constraint firstItem="Ktx-Kt-ehx" firstAttribute="width" secondItem="fFl-Lp-STT" secondAttribute="width" id="jP9-EB-9Qv"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="bottom" distribution="equalSpacing" alignment="bottom" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K2J-ur-vJA" userLabel="Buttons Stack View">
