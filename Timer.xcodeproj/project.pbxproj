@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DD4CB68124EC826600814464 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68024EC826600814464 /* Timer.swift */; };
+		DD4CB68424ED68EA00814464 /* TimerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68324ED68E900814464 /* TimerType.swift */; };
+		DD4CB68824ED774200814464 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68724ED774200814464 /* HistoryTableViewCell.swift */; };
+		DD4CB68B24ED8C3F00814464 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */; };
 		DD6AB27324EC5082004BA8B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27224EC5082004BA8B9 /* AppDelegate.swift */; };
 		DD6AB27524EC5082004BA8B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27424EC5082004BA8B9 /* SceneDelegate.swift */; };
 		DD6AB27724EC5082004BA8B9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27624EC5082004BA8B9 /* TimerViewController.swift */; };
@@ -18,6 +21,9 @@
 
 /* Begin PBXFileReference section */
 		DD4CB68024EC826600814464 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		DD4CB68324ED68E900814464 /* TimerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerType.swift; sourceTree = "<group>"; };
+		DD4CB68724ED774200814464 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		DD6AB26F24EC5082004BA8B9 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6AB27224EC5082004BA8B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD6AB27424EC5082004BA8B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +45,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD4CB68224ED68D800814464 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD4CB68024EC826600814464 /* Timer.swift */,
+				DD4CB68324ED68E900814464 /* TimerType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DD4CB68524ED76E400814464 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD4CB68724ED774200814464 /* HistoryTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DD4CB68624ED76E900814464 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AB27624EC5082004BA8B9 /* TimerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD4CB68924ED8C3000814464 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DD6AB26624EC5082004BA8B9 = {
 			isa = PBXGroup;
 			children = (
@@ -58,9 +97,11 @@
 		DD6AB27124EC5082004BA8B9 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
+				DD4CB68924ED8C3000814464 /* Extensions */,
+				DD4CB68224ED68D800814464 /* Model */,
+				DD4CB68524ED76E400814464 /* View */,
+				DD4CB68624ED76E900814464 /* Controller */,
 				DD6AB28624EC52FC004BA8B9 /* Supporting files */,
-				DD6AB27624EC5082004BA8B9 /* TimerViewController.swift */,
-				DD4CB68024EC826600814464 /* Timer.swift */,
 				DD6AB27824EC5082004BA8B9 /* Main.storyboard */,
 				DD6AB28024EC5087004BA8B9 /* Info.plist */,
 			);
@@ -149,10 +190,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD4CB68B24ED8C3F00814464 /* TimeInterval.swift in Sources */,
 				DD6AB27724EC5082004BA8B9 /* TimerViewController.swift in Sources */,
 				DD6AB27324EC5082004BA8B9 /* AppDelegate.swift in Sources */,
+				DD4CB68424ED68EA00814464 /* TimerType.swift in Sources */,
 				DD6AB27524EC5082004BA8B9 /* SceneDelegate.swift in Sources */,
 				DD4CB68124EC826600814464 /* Timer.swift in Sources */,
+				DD4CB68824ED774200814464 /* HistoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
