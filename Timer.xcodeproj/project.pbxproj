@@ -13,6 +13,9 @@
 		DD4CB68B24ED8C3F00814464 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */; };
 		DD4CB68F24EDAED900814464 /* TimeIntervalHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB68E24EDAED900814464 /* TimeIntervalHistory.swift */; };
 		DD4CB69124EDAF6800814464 /* TimeIntervalEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB69024EDAF6800814464 /* TimeIntervalEntity.swift */; };
+		DD4CB69624EEDD2F00814464 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB69524EEDD2F00814464 /* Constants.swift */; };
+		DD4CB69824EEDD8200814464 /* Constants+TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB69724EEDD8200814464 /* Constants+TimerModel.swift */; };
+		DD4CB69A24EEDE3900814464 /* Constants+TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4CB69924EEDE3900814464 /* Constants+TimerViewController.swift */; };
 		DD6AB27324EC5082004BA8B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27224EC5082004BA8B9 /* AppDelegate.swift */; };
 		DD6AB27524EC5082004BA8B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27424EC5082004BA8B9 /* SceneDelegate.swift */; };
 		DD6AB27724EC5082004BA8B9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB27624EC5082004BA8B9 /* TimerViewController.swift */; };
@@ -28,6 +31,9 @@
 		DD4CB68A24ED8C3E00814464 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		DD4CB68E24EDAED900814464 /* TimeIntervalHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalHistory.swift; sourceTree = "<group>"; };
 		DD4CB69024EDAF6800814464 /* TimeIntervalEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalEntity.swift; sourceTree = "<group>"; };
+		DD4CB69524EEDD2F00814464 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DD4CB69724EEDD8200814464 /* Constants+TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+TimerModel.swift"; sourceTree = "<group>"; };
+		DD4CB69924EEDE3900814464 /* Constants+TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+TimerViewController.swift"; sourceTree = "<group>"; };
 		DD6AB26F24EC5082004BA8B9 /* Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6AB27224EC5082004BA8B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD6AB27424EC5082004BA8B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +106,16 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		DD4CB69424EEDD2100814464 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DD4CB69524EEDD2F00814464 /* Constants.swift */,
+				DD4CB69724EEDD8200814464 /* Constants+TimerModel.swift */,
+				DD4CB69924EEDE3900814464 /* Constants+TimerViewController.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		DD6AB26624EC5082004BA8B9 = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +135,6 @@
 		DD6AB27124EC5082004BA8B9 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				DD4CB68924ED8C3000814464 /* Extensions */,
 				DD4CB68224ED68D800814464 /* Model */,
 				DD4CB68524ED76E400814464 /* View */,
 				DD4CB68624ED76E900814464 /* Controller */,
@@ -133,6 +148,8 @@
 		DD6AB28624EC52FC004BA8B9 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				DD4CB69424EEDD2100814464 /* Constants */,
+				DD4CB68924ED8C3000814464 /* Extensions */,
 				DD6AB27224EC5082004BA8B9 /* AppDelegate.swift */,
 				DD6AB27424EC5082004BA8B9 /* SceneDelegate.swift */,
 				DD6AB27B24EC5087004BA8B9 /* Assets.xcassets */,
@@ -217,9 +234,12 @@
 				DD4CB68F24EDAED900814464 /* TimeIntervalHistory.swift in Sources */,
 				DD4CB69124EDAF6800814464 /* TimeIntervalEntity.swift in Sources */,
 				DD6AB27324EC5082004BA8B9 /* AppDelegate.swift in Sources */,
+				DD4CB69624EEDD2F00814464 /* Constants.swift in Sources */,
 				DD4CB68424ED68EA00814464 /* TimerType.swift in Sources */,
 				DD6AB27524EC5082004BA8B9 /* SceneDelegate.swift in Sources */,
+				DD4CB69824EEDD8200814464 /* Constants+TimerModel.swift in Sources */,
 				DD4CB68124EC826600814464 /* Timer.swift in Sources */,
+				DD4CB69A24EEDE3900814464 /* Constants+TimerViewController.swift in Sources */,
 				DD4CB68824ED774200814464 /* HistoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

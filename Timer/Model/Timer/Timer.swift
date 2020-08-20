@@ -8,6 +8,8 @@
 
 import Foundation
 
+fileprivate typealias K = Constants.TimerModel
+
 class TimeCounter: TimerType {
     // MARK: Output
     var state: TimerState = .none {
@@ -26,7 +28,7 @@ class TimeCounter: TimerType {
     private var actionTimerState: ActionTimerState = .suspended
     private var startTime: Date? {
         didSet {
-            UserDefaults.standard.set(startTime, forKey: "startTime")
+            UserDefaults.standard.set(startTime, forKey: K.startTimeKey)
         }
     }
     private var actionTimer: DispatchSourceTimer?
@@ -34,14 +36,14 @@ class TimeCounter: TimerType {
     // Field needed to perform proper calculation of time after pause. This value is added to the general time interval.
     private var timeIntervalBeforePause: TimeInterval {
         didSet {
-            UserDefaults.standard.set(timeIntervalBeforePause, forKey: "timeIntervalBeforePause")
+            UserDefaults.standard.set(timeIntervalBeforePause, forKey: K.timerIntervalBeforePauseKey)
         }
     }
     
     // MARK: Initialization
     init() {
-        startTime = UserDefaults.standard.object(forKey: "startTime") as? Date
-        timeIntervalBeforePause = UserDefaults.standard.double(forKey: "timeIntervalBeforePause")
+        startTime = UserDefaults.standard.object(forKey: K.startTimeKey) as? Date
+        timeIntervalBeforePause = UserDefaults.standard.double(forKey: K.timerIntervalBeforePauseKey)
     }
     
     deinit {
@@ -128,7 +130,7 @@ private extension TimeCounter {
         actionTimer?.setEventHandler(handler: { [weak self] in
             self?.updateCounter()
         })
-        actionTimer?.schedule(deadline: .now() + TimeCounter.timerTimeInterval, repeating: TimeCounter.timerTimeInterval)
+        actionTimer?.schedule(deadline: .now() + K.timerTimeInterval, repeating: K.timerTimeInterval)
         resumeActionTimer()
     }
     
@@ -144,11 +146,6 @@ private extension TimeCounter {
         actionTimerState = .resumed
         actionTimer?.resume()
     }
-}
-
-// MARK: Constants
-extension TimeCounter {
-    static let timerTimeInterval = 0.01
 }
 
 private extension TimeCounter {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+fileprivate typealias K = Constants.TimerViewController
+
 class TimerViewController: UIViewController {
     // MARK: Outlets
     @IBOutlet weak var timeLabel: UILabel!
@@ -45,17 +47,17 @@ class TimerViewController: UIViewController {
     
     // MARK: Showing alert
     func showAlert(time: String, completion: @escaping () -> Void) {
-        let alert = UIAlertController(title: "Timer stopped", message: "Please enter a name for time interval to save it.", preferredStyle: .alert)
+        let alert = UIAlertController(title: K.Alert.title, message: K.Alert.message, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: K.Alert.cancelButtonTitle, style: .cancel))
+        alert.addAction(UIAlertAction(title: K.Alert.saveButtonTitle, style: .default, handler: { _ in
             if let textField = alert.textFields?.first {
                 self.saveTimeInterval(name: textField.text ?? "", time: time)
             }
         }))
         
         alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Timer name"
+            textField.placeholder = K.Alert.textFieldPlaceholder
         })
         
         present(alert, animated: true, completion: completion)
@@ -68,15 +70,15 @@ extension TimerViewController: TimerTypeDelegate {
         case .none:
             // Next action for a user is to start timer
             startPauseButton.backgroundColor = UIColor.green
-            startPauseButton.setTitle("Start", for: .normal)
+            startPauseButton.setTitle(K.startButtonTitle, for: .normal)
         case .running:
             // Next action for a user is to pause timer
             startPauseButton.backgroundColor = UIColor.yellow
-            startPauseButton.setTitle("Pause", for: .normal)
+            startPauseButton.setTitle(K.pauseButtonTitle, for: .normal)
         case .paused:
             // Next action for a user is to resume timer
             startPauseButton.backgroundColor = UIColor.green
-            startPauseButton.setTitle("Resume", for: .normal)
+            startPauseButton.setTitle(K.resumeButtonTitle, for: .normal)
         }
     }
     
@@ -94,7 +96,7 @@ extension TimerViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let timeIntervalData = timeIntervalsHistory.timeIntervals[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TimeInterval") as! HistoryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.tableViewCellIdentifier) as! HistoryTableViewCell
         cell.setup(name: timeIntervalData.name, time: timeIntervalData.time)
         
         return cell
@@ -120,7 +122,7 @@ private extension TimerViewController {
     // MARK: UI Configuration
     func configureUI() {
         // Set large font size to scale to the proper one after viewDidLayoutSubviews
-        timeLabel.font = UIFont.systemFont(ofSize: 100)
+        timeLabel.font = UIFont.systemFont(ofSize: CGFloat(K.fontSize))
         timeLabel.numberOfLines = 1
         
         // Actions needed to have time label size scale to the whole screen width on all devices
@@ -143,8 +145,8 @@ private extension TimerViewController {
         stopButton.layer.cornerRadius = startPauseButton.frame.size.height / 2
         
         // Set initial titles for buttons
-        startPauseButton.setTitle("Start", for: .normal)
-        stopButton.setTitle("Stop", for: .normal)
+        startPauseButton.setTitle(K.startButtonTitle, for: .normal)
+        stopButton.setTitle(K.stopButtonTitle, for: .normal)
     }
     
     // MARK: Timer UI Logic
