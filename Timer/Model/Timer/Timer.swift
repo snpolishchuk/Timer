@@ -32,6 +32,7 @@ class TimeCounter: TimerType {
     // MARK: Initialization
     init() {
         startTime = UserDefaults.standard.object(forKey: "startTime") as? Date
+        resumeCounterIfNeeded(from: startTime)
     }
     
     deinit {
@@ -66,7 +67,7 @@ class TimeCounter: TimerType {
 
 // MARK: Private methods
 private extension TimeCounter {
-    // MARK: Timer actions
+    // MARK: TimeCounter actions
     func start() {
         // Start only one timer
         guard actionTimer == nil else { return }
@@ -87,7 +88,7 @@ private extension TimeCounter {
         stopActionTimer()
     }
     
-    // MARK: Timer logic
+    // MARK: TimeCounter logic
     func updateCounter() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self, let startTime = self.startTime else { return }
@@ -97,6 +98,13 @@ private extension TimeCounter {
         }
     }
     
+    func resumeCounterIfNeeded(from startTime: Date?) {
+        if startTime != nil {
+            start()
+        }
+    }
+    
+    // MARK: ActionTimer actions
     func startActionTimer() {
         actionTimer = DispatchSource.makeTimerSource()
         actionTimer?.setEventHandler(handler: { [weak self] in
