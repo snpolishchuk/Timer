@@ -23,5 +23,6 @@ extension Constants.TimerViewController {
     static let stopButtonTitle = "Stop"
     static let tableViewCellIdentifier = "TimeInterval"
     
+    static let fontName = "Courier"
     static let fontSize = 100
 }

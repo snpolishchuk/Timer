@@ -122,7 +122,7 @@ private extension TimerViewController {
     // MARK: UI Configuration
     func configureUI() {
         // Set large font size to scale to the proper one after viewDidLayoutSubviews
-        timeLabel.font = UIFont.systemFont(ofSize: CGFloat(K.fontSize))
+        timeLabel.font = UIFont(name: K.fontName, size: CGFloat(K.fontSize))
         timeLabel.numberOfLines = 1
         
         // Actions needed to have time label size scale to the whole screen width on all devices
@@ -139,6 +139,9 @@ private extension TimerViewController {
         let maxWidth = startButtonWidth > stopButtonWidth ? startButtonWidth : stopButtonWidth
         startPauseButtonWidthConstraint.constant = maxWidth
         stopButtonWidthConstraint.constant = maxWidth
+        
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
         
         // Make buttons round
         startPauseButton.layer.cornerRadius = startPauseButton.frame.size.height / 2
