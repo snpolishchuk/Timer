@@ -18,12 +18,13 @@ class TimeCounter: TimerType {
     weak var delegate: TimerTypeDelegate?
 
     // MARK: Properties
+    private var actionTimerState: ActionTimerState = .suspended
     private var startTime: Date? {
         didSet {
             UserDefaults.standard.set(startTime, forKey: "startTime")
         }
     }
-    private var actionTimer: Timer?
+    private var actionTimer: DispatchSourceTimer?
     private var actualTimeInterval: TimeInterval = 0
     // Field needed to perform proper calculation of time after pause. This value is added to the general time interval.
     private var timeIntervalBeforePause: TimeInterval = 0
@@ -31,11 +32,12 @@ class TimeCounter: TimerType {
     // MARK: Initialization
     init() {
         startTime = UserDefaults.standard.object(forKey: "startTime") as? Date
-        resumeCounterIfNeeded(from: startTime)
     }
     
     deinit {
-        stop()
+        actionTimer?.setEventHandler {}
+        actionTimer?.cancel()
+        actionTimer = nil
     }
     
     // MARK: Input
@@ -72,7 +74,8 @@ private extension TimeCounter {
         if startTime == nil {
             startTime = Date()
         }
-        actionTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        
+        startActionTimer()
     }
     
     func pause() {
@@ -85,23 +88,46 @@ private extension TimeCounter {
     }
     
     // MARK: Timer logic
-    @objc func updateCounter() {
-        guard let startTime = startTime else { return }
-        state = .running
-        actualTimeInterval = Date().timeIntervalSince(startTime) + timeIntervalBeforePause
-        delegate?.didUpdateTimeInterval(with: actualTimeInterval.asString)
+    func updateCounter() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, let startTime = self.startTime else { return }
+            self.state = .running
+            self.actualTimeInterval = Date().timeIntervalSince(startTime) + self.timeIntervalBeforePause
+            self.delegate?.didUpdateTimeInterval(with: self.actualTimeInterval.asString)
+        }
+    }
+    
+    func startActionTimer() {
+        actionTimer = DispatchSource.makeTimerSource()
+        actionTimer?.setEventHandler(handler: { [weak self] in
+            self?.updateCounter()
+        })
+        actionTimer?.schedule(deadline: .now() + TimeCounter.timerTimeInterval, repeating: TimeCounter.timerTimeInterval)
+        resumeActionTimer()
     }
     
     func stopActionTimer() {
-        if actionTimer != nil {
-            actionTimer?.invalidate()
-            actionTimer = nil
-        }
+        guard actionTimerState != .suspended else { return }
+        actionTimerState = .suspended
+        actionTimer?.cancel()
+        actionTimer = nil
     }
 
-    func resumeCounterIfNeeded(from startTime: Date?) {
-        if startTime != nil {
-            start()
-        }
+    func resumeActionTimer() {
+        guard actionTimerState != .resumed else { return }
+        actionTimerState = .resumed
+        actionTimer?.resume()
+    }
+}
+
+// MARK: Constants
+extension TimeCounter {
+    static let timerTimeInterval = 0.01
+}
+
+private extension TimeCounter {
+    enum ActionTimerState {
+        case suspended
+        case resumed
     }
 }
