@@ -15,7 +15,12 @@ class TimeCounter: TimerType {
             delegate?.stateDidChange(state: state)
         }
     }
-    weak var delegate: TimerTypeDelegate?
+    weak var delegate: TimerTypeDelegate? {
+        didSet {
+            resumeCounterIfNeeded(from: startTime)
+            resumePauseStateIfNeeded()
+        }
+    }
 
     // MARK: Properties
     private var actionTimerState: ActionTimerState = .suspended
@@ -27,12 +32,16 @@ class TimeCounter: TimerType {
     private var actionTimer: DispatchSourceTimer?
     private var actualTimeInterval: TimeInterval = 0
     // Field needed to perform proper calculation of time after pause. This value is added to the general time interval.
-    private var timeIntervalBeforePause: TimeInterval = 0
+    private var timeIntervalBeforePause: TimeInterval {
+        didSet {
+            UserDefaults.standard.set(timeIntervalBeforePause, forKey: "timeIntervalBeforePause")
+        }
+    }
     
     // MARK: Initialization
     init() {
         startTime = UserDefaults.standard.object(forKey: "startTime") as? Date
-        resumeCounterIfNeeded(from: startTime)
+        timeIntervalBeforePause = UserDefaults.standard.double(forKey: "timeIntervalBeforePause")
     }
     
     deinit {
@@ -83,6 +92,7 @@ private extension TimeCounter {
         state = .paused
     
         timeIntervalBeforePause = actualTimeInterval
+        
         startTime = nil
         
         stopActionTimer()
@@ -104,6 +114,14 @@ private extension TimeCounter {
         }
     }
     
+    func resumePauseStateIfNeeded() {
+        if timeIntervalBeforePause > 0 {
+            state = .paused
+            actualTimeInterval = timeIntervalBeforePause
+            delegate?.didUpdateTimeInterval(with: self.actualTimeInterval.asString)
+        }
+    }
+
     // MARK: ActionTimer actions
     func startActionTimer() {
         actionTimer = DispatchSource.makeTimerSource()
