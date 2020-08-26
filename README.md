@@ -1,6 +1,6 @@
 # Timer
 
-Single one screen app for traking time.
+Single one screen app for tracking time.
 
 Top half - for adding a new timer and the current state if it is counting.
 Bottom half - for list of previous timers.
