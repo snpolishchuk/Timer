@@ -2,7 +2,7 @@
 
 Single one screen app for traking time.
 
-Top half - for adding a new timer and the current state if it is counting
+Top half - for adding a new timer and the current state if it is counting.
 Bottom half - for list of previous timers.
 
 Functionality:
